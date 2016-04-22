@@ -1,24 +1,63 @@
 ## README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Create a Workspace Folder
+```
+$ mkdir BAI5_AIP
+$ cd BAI5_AIP
+```
 
-Things you may want to cover:
+### New Rails Application
+```
+$ mkdir apiapp
+$ cd apiapp
+$ rvm use ruby-2.3.0@apiapp --ruby-version --create
+```
+Install Rails 5 Beta3
+```
+$ gem install rails --pre
+```
+Create new Rails Api Application
+```
+$ rails new apiapp --api
+```
 
-* Ruby version
+### Scaffolding the plan resource
+```
+$ cd apiapp
+```
+ID will generate automatically
+```
+$ rails g scaffold plan content:string
+```
 
-* System dependencies
+### Update database and generate serializer
+```
+$ rake db:migrate
+```
+Add this line to your application's Gemfile: 
+```
+gem 'active_model_serializers'
+```
+And then execute
+```
+$ bundle
+```
+Generate a serializer
+```
+$ rails g serializer plan content
+```
 
-* Configuration
+### Run server
+```
+$ rails s
+```
 
-* Database creation
+### Create a new Plan
+```
+$ curl -H "Content-Type:application/json; charset=utf-8" -d '{"content":"something new"}' http://localhost:3000/plans
+```
+<br>
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Useful Links
+* http://railsapps.github.io/installrubyonrails-mac.html
+* https://wyeworks.com/blog/2015/6/11/how-to-build-a-rails-5-api-only-and-backbone-application
