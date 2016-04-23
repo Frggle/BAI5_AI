@@ -62,6 +62,7 @@ $ curl -H "Content-Type:application/json; charset=utf-8" -d '{"content":"somethi
 * http://railsapps.github.io/installrubyonrails-mac.html
 * https://wyeworks.com/blog/2015/6/11/how-to-build-a-rails-5-api-only-and-backbone-application
 * http://billpatrianakos.me/blog/2013/10/13/list-of-rails-status-code-symbols/
+* https://devcenter.heroku.com/articles/getting-started-with-rails5
 
 ### Useful Commands
 Reset Rails Database
