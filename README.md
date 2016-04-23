@@ -6,7 +6,7 @@ $ mkdir BAI5_AIP
 $ cd BAI5_AIP
 ```
 
-### New Rails Application
+### New Rails Application with SQLite3 Database
 ```
 $ mkdir apiapp
 $ cd apiapp
