@@ -61,3 +61,11 @@ $ curl -H "Content-Type:application/json; charset=utf-8" -d '{"content":"somethi
 ### Useful Links
 * http://railsapps.github.io/installrubyonrails-mac.html
 * https://wyeworks.com/blog/2015/6/11/how-to-build-a-rails-5-api-only-and-backbone-application
+
+### Useful Commands
+Reset Rails Database
+```
+$ rake db:reset
+```
+
+
