@@ -2,6 +2,7 @@
 
 [Deployment Website on Heroku](https://murmuring-oasis-85410.herokuapp.com/plans)
 
+## INSTALLATION
 ### Create a Workspace Folder
 ```
 $ mkdir BAI5_AIP
