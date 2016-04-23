@@ -46,7 +46,7 @@ class PlansController < ApplicationController
   def destroy
     if params.key?("id")
       @plan.destroy
-      render json: @plan, status: :ok, location: @plan
+      render nothing: true, status: :ok
     else
       render :status => :method_not_allowed, :text => "Invalid Input"
     end
