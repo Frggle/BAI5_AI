@@ -1,4 +1,7 @@
 class PlansController < ApplicationController
+  before_action :check_content, only: [:create, :update]
+  before_action :check_id, only: [:show, :update, :destroy]
+
   before_action :set_plan, only: [:show, :update, :destroy]
 
   # GET /plans
@@ -17,28 +20,19 @@ class PlansController < ApplicationController
   def create
     @plan = Plan.new(plan_params)
 
-    #if plan_params[:content] != ""
-    if params.key?("content")
-      if @plan.save
-        render json: @plan, status: :ok, location: @plan
-      else
-        render json: @plan.errors, status: :unprocessable_entity
-      end
+    if @plan.save
+      render json: @plan, status: :ok, location: @plan
     else
-      render :status => :method_not_allowed, :text => "Invalid Input"
+      render json: @plan.errors, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /plans/1
   def update
-    if params.key?("content")
-      if @plan.update(plan_params)
-        render json: @plan
-      else
-        render json: @plan.errors, status: :unprocessable_entity
-      end
+    if @plan.update(plan_params)
+      render json: @plan
     else
-      render :status => :method_not_allowed, :text => "Invalid Input"
+      render json: @plan.errors, status: :unprocessable_entity
     end
   end
 
@@ -53,18 +47,32 @@ class PlansController < ApplicationController
   end
 
   private
+    def check_id
+      # Prueft, ob ID gueltig ist -> nur Zahlen
+      if plan_params[:id] !~ /^(?<num>\d+)$/
+        render :status => :method_not_allowed, :text => "Invalid ID"
+      else
+        # Prueft, ob ID existiert in DB
+        render :status => :not_found, :text => "ID not found" if !Plan.exists?(params[:id])
+      end
+    end
+
+    # Prueft ob JSON das Feld "content" enthaelt
+    def check_content
+      if !params.key?("content")
+        render :status => :method_not_allowed, :text => "content field expected"
+      else
+      end
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_plan
-      if Plan.exists?(params[:id])
-        @plan = Plan.find(params[:id])
-      else
-        render :status => :not_found, :text => "ID not found"
-      end
+      @plan = Plan.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def plan_params
       #params.require(:plan).permit(:content)
-      params.permit(:content)
+      params.permit(:id, :content)
     end
 end
